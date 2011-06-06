@@ -3,6 +3,12 @@ package edu.uci.lasso;
 import java.text.DecimalFormat;
 import java.util.List;
 
+/**
+ * Utility Math functions that are used by other classes.
+ * 
+ * @author Yasser Ganjisaffar (http://www.ics.uci.edu/~yganjisa/)
+ *
+ */
 public class MathUtil {
 
 	public static double getAvg(double[] arr) {
@@ -60,7 +66,7 @@ public class MathUtil {
 		}
 		return product;
 	}
-	
+
 	public static double getDotProduct(double[] vector1, double[] vector2, int length) {
 		double product = 0;
 		for (int i = 0; i < length; i++) {
@@ -68,35 +74,32 @@ public class MathUtil {
 		}
 		return product;
 	}
-	
-	public static double getDotProduct(float[] vector1, float[] vector2)
-    {
-        return getDotProduct(vector1, vector2, vector1.length);
-    }
-	
+
+	public static double getDotProduct(float[] vector1, float[] vector2) {
+		return getDotProduct(vector1, vector2, vector1.length);
+	}
+
 	// Divides the second vector from the first one (vector1[i] /= val)
-    public static void divideInPlace(float[] vector, float val)
-    {
-        int length = vector.length;
-        for (int i = 0; i < length; i++)
-        {
-        	vector[i] /= val;
-        }
-    }
-    
-    public static double[][] allocateDoubleMatrix(int m, int n) {
+	public static void divideInPlace(float[] vector, float val) {
+		int length = vector.length;
+		for (int i = 0; i < length; i++) {
+			vector[i] /= val;
+		}
+	}
+
+	public static double[][] allocateDoubleMatrix(int m, int n) {
 		double[][] mat = new double[m][];
 		for (int i = 0; i < m; i++) {
 			mat[i] = new double[n];
 		}
 		return mat;
 	}
-    
-    public static String getFormattedDouble(double val, int decimalPoints) {
-    	String format = "#.";
-    	for (int i = 0; i < decimalPoints; i++) {
-    		format += "#";
-    	}
-       	return new DecimalFormat(format).format(val);
-    }
+
+	public static String getFormattedDouble(double val, int decimalPoints) {
+		String format = "#.";
+		for (int i = 0; i < decimalPoints; i++) {
+			format += "#";
+		}
+		return new DecimalFormat(format).format(val);
+	}
 }
