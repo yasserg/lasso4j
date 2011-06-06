@@ -1,5 +1,13 @@
 package edu.uci.lasso;
 
+/**
+ * This class is a container for arrays and values that
+ * are computed during computation of a lasso fit. It also
+ * contains the final weights of features.
+ * 
+ * @author Yasser Ganjisaffar (http://www.ics.uci.edu/~yganjisa/)
+ */
+
 public class LassoFit {
 	// Number of lambda values
 	public int numberOfLambdas;
@@ -47,6 +55,17 @@ public class LassoFit {
 			weights[indices[i]] = compressedWeights[lambdaIdx][i];
 		}
 		return weights;
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		int numberOfSolutions = numberOfLambdas;
+		sb.append("Compression R2 values:\n");
+		for (int i = 0; i < numberOfSolutions; i++) {
+			sb.append((i + 1) + "\t" + nonZeroWeights[i] + "\t" + MathUtil.getFormattedDouble(rsquared[i], 4) + "\t"
+					+ MathUtil.getFormattedDouble(lambdas[i], 5) + "\n");
+		}
+		return sb.toString().trim();
 	}
 
 }

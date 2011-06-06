@@ -5,7 +5,7 @@ package edu.uci.lasso;
  * (2008) Regularization Paths for Generalized Linear Models via Coordinate
  * Descent. http://www-stat.stanford.edu/~hastie/Papers/glmnet.pdf
  * 
- * @author Yasser Ganjisaffar
+ * @author Yasser Ganjisaffar (http://www.ics.uci.edu/~yganjisa/)
  */
 
 public class LassoFitGenerator {
@@ -323,13 +323,6 @@ public class LassoFitGenerator {
 
 	public LassoFit fit(int maxAllowedFeaturesPerModel) {
 		LassoFit fit = getLassoFit(maxAllowedFeaturesPerModel);
-		int numberOfSolutions = fit.numberOfLambdas;
-		System.out.println("Compression R2 values:");
-		for (int i = 0; i < numberOfSolutions; i++) {
-			System.out.println((i + 1) + "\t" + fit.nonZeroWeights[i] + "\t"
-					+ MathUtil.getFormattedDouble(fit.rsquared[i], 4) + "\t"
-					+ MathUtil.getFormattedDouble(fit.lambdas[i], 5));
-		}
 		return fit;
 	}
 }

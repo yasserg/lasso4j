@@ -5,13 +5,37 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class demonstrates the usage of LassoFit 
+ * 
+ * @author Yasser Ganjisaffar (http://www.ics.uci.edu/~yganjisa/)
+ */
 public class TestLasso {
 
 	public static void main(String[] args) throws Exception {
+		
+		/*
+		 * Input data is in "src/test/resources/diabetes.data" file
+		 * We initialize a reader to read this input file
+		 */		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(TestLasso.class.getClassLoader().getResourceAsStream("diabetes.data")));
-		String line = reader.readLine(); // ignore header
+		
+		/*
+		 * The first line of the input file is the header which should be ignored.
+		 * So, we read the first line
+		 */
+		String line = reader.readLine();
+		
+		/*
+		 * Number of features (predictors) is determined based on the 
+		 * number of columns in the header line
+		 */
 		String[] parts = line.split("\t");
 		int featuresCount = parts.length - 1;
+		
+		/*
+		 * Observations and targets are read and loaded from the input file
+		 */
 		List<float[]> observations = new ArrayList<float[]>();
 		List<Float> targets = new ArrayList<Float>();
 		while ((line = reader.readLine()) != null) {
@@ -23,7 +47,10 @@ public class TestLasso {
 			observations.add(curObservation);
 			targets.add(Float.parseFloat(parts[parts.length - 1]));
 		}
-		
+
+		/*
+		 * LassoFitGenerator is initialized
+		 */
 		LassoFitGenerator fitGenerator = new LassoFitGenerator();
 		int numObservations = observations.size();
 		fitGenerator.init(featuresCount, numObservations);
@@ -31,6 +58,17 @@ public class TestLasso {
 			fitGenerator.setObservationValues(i, observations.get(i));
 			fitGenerator.setTarget(i, targets.get(i));
 		}
-		fitGenerator.fit(-1);
+		
+		/*
+		 * Generate the Lasso fit. The -1 arguments means that
+		 * there would be no limit on the maximum number of 
+		 * features per model
+		 */
+		LassoFit fit = fitGenerator.fit(-1);
+		
+		/*
+		 * Print the generated fit
+		 */
+		System.out.println(fit);
 	}
 }
